@@ -65,6 +65,6 @@ for data in [x_axis, y_axis, umur]:
 
 # Menambahkan ke document
 inputs = Column(title, x_axis, y_axis, umur, gender)
-curdoc().add_root(row(inputs, plot, width=1000))
+curdoc().add_root(row(plot, inputs, width=1000))
 curdoc().title = 'Final Project - Kelompok 1'
 curdoc().theme = 'caliber'
