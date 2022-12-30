@@ -15,8 +15,8 @@ source = ColumnDataSource(data=dict(x=x, y=y))
 # Membuat widget
 title = TextInput(title='Judul Plot', value='Plot Kendaraan')
 
-umur_options = ['< 1 Tahun', '> 2 Tahun', '1-2 Tahun']
-umur = Select(title='Umur Kendaraan', value='< 1 Tahun', options=umur_options)
+umur_options = ['< 1 Tahun', '> 2 Tahun', '1-2 Tahun', 'All']
+umur = Select(title='Umur Kendaraan', value='All', options=umur_options)
 
 axis_options = ['Umur','Kode_Daerah', 'Premi', 'Kanal_Penjualan', 'Lama_Berlangganan']
 x_axis = Select(title='X Axis', value='Premi', options=axis_options)
@@ -40,7 +40,9 @@ def update_data(attrname, old, new):
     plot.xaxis.axis_label = x_axis.value
     plot.yaxis.axis_label = y_axis.value
 
-    df2 = df[df['Umur_Kendaraan']==umur.value]
+    df2 = df
+    if umur.value != 'All':
+        df2 = df[df['Umur_Kendaraan']==umur.value]
     x = df2[x_axis.value]
     y = df2[y_axis.value]
     source.data = dict(x=x, y=y)
