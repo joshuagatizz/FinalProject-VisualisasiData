@@ -49,15 +49,14 @@ p = figure(title="Covid Figure", height=600, width=800, tools="reset,save",
             x_axis_type="datetime", x_axis_location="above", 
             x_range=(dates[0], dates[len(dates)-1]))
 
-l1 = p.line('date', 'freq', source=source, legend_label=provinsi1.value, color='red')
-
+p.line('date', 'freq', source=source, legend_label=provinsi1.value, color='red')
 p.line('date', 'freq', source=source2, legend_label=provinsi2.value, color='blue')
 p.yaxis.axis_label = 'Frequency'
 
 select = figure(title="Adjust the range here",
                 height=130, width=800, y_range=p.y_range,
                 x_axis_type="datetime", y_axis_type=None,
-                tools="reset,save", toolbar_location=None, background_fill_color="#efefef")
+                tools="reset,save", toolbar_location=None)
 
 range_tool = RangeTool(x_range=p.x_range)
 range_tool.overlay.fill_color = "navy"
@@ -137,7 +136,6 @@ def update_case(attr, old, new):
         chosen_case = 'Daily_Death'
     elif case.active == 2:
         chosen_case = 'Daily_Recovered'
-    print(chosen_case)
     source.data = dict(date=dates, freq=data[chosen_case])
     source2.data = dict(date=dates, freq=data2[chosen_case])
 
